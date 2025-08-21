@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>End of Session</title>
+</head>
+<body>
+    <h1>Reflection: After Your Session</h1>
+    <form action="/end" method="post">
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+
+        <label>What progress did you make?</label><br>
+        <textarea name="progress" required></textarea><br><br>
+
+        <label>Which levers did you use?</label><br>
+        <input type="text" name="levers_used" placeholder="e.g. focus, notes, breaks"><br><br>
+
+        <label>How do you feel now (score)?</label><br>
+        <input type="number" name="state_score" min="1" max="10" required><br><br>
+
+        <label>Describe your state (text):</label><br>
+        <textarea name="state_text"></textarea><br><br>
+
+        <button type="submit">Save Reflection</button>
+    </form>
+</body>
+</html>

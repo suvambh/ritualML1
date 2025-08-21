@@ -1,0 +1,21 @@
+<form action="/begin" method="post">
+  <label>How long will this session be (minutes)?</label>
+  <input type="number" name="time" min="5" max="180" required><br>
+
+  <label>Goal:</label>
+  <input type="text" name="goal" required><br>
+
+  <label>Levers (comma separated):</label>
+  <input type="text" name="levers"><br>
+
+  <label>State (1–10):</label>
+  <input type="number" name="state_score" min="1" max="10" required><br>
+
+  <label>State description:</label>
+  <input type="text" name="state_text"><br>
+
+  <label>Model (why this will work):</label>
+  <input type="text" name="model"><br>
+
+  <button type="submit">Begin Session</button>
+</form>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Your Dashboard</h1>
+    <a href="/start">➕ Start New Session</a>
+    <hr>
+
+    {% if sessions %}
+        <h2>Recent Sessions</h2>
+        <ul>
+        {% for s in sessions %}
+            <li>
+                <b>Session ID:</b> {{ s.id }} |
+                <b>Duration:</b> {{ s.duration_minutes }} min |
+                <b>Started:</b> {{ s.start_time.strftime("%Y-%m-%d %H:%M") }}
+                <br>
+                <a href="/end?session_id={{ s.id }}">End Reflection</a>
+
+                {% if s.reflections %}
+                    <ul>
+                        {% for r in s.reflections %}
+                            <li>
+                                [{{ r.phase }}] Goal: {{ r.goal or "—" }},
+                                State: {{ r.state["score"] if r.state else "" }}/10
+                                <br>
+                                "{{ r.state["text"] if r.state else "" }}"
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+            <hr>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No sessions yet. <a href="/start">Start your first one!</a></p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Focus Session</title>
+    <script>
+        // Countdown timer logic
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    // auto-finish when time is up
+                    window.location.href = "/end?session_id={{ session_id }}";
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            const minutes = {{ duration }};  // Jinja injects duration
+            const display = document.querySelector('#time');
+            startTimer(minutes * 60, display);
+        };
+    </script>
+</head>
+<body>
+    <h1>Focus Session</h1>
+    <p>Time remaining: <span id="time"></span></p>
+
+    <!-- Finish session button -->
+    <form action="/end" method="get">
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+        <button type="submit">Finish Session</button>
+    </form>
+</body>
+</html>
